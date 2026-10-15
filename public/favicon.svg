@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="16" fill="#0a0f0d"/>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#131c18" stroke="#a3e635" stroke-width="2" stroke-opacity="0.3"/>
+  <text x="50%" y="54%" font-family="'Noto Sans Kannada', system-ui, sans-serif" font-size="34" font-weight="900" fill="#a3e635" text-anchor="middle" dominant-baseline="central">ಕ</text>
+</svg>
