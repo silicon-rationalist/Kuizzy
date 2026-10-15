@@ -6,6 +6,7 @@ import { RevisePage } from './pages/RevisePage';
 import { AnalyticsPage } from './pages/AnalyticsPage';
 import { TOTAL_QUESTIONS } from './data/questions';
 import { getReviseQueue } from './lib/storage';
+import { CreatorModal, GitHubIcon, LinkedInIcon, InstagramIcon, MailIcon } from './components/CreatorModal';
 
 type Tab = 'home' | 'study' | 'test' | 'revise' | 'analytics';
 
@@ -20,6 +21,7 @@ const NAV_ITEMS: { id: Tab; label: string }[] = [
 function LandingPage({ onNav }: { onNav: (tab: Tab) => void }) {
   const reviseQueue = getReviseQueue();
   const reviseCount = Object.values(reviseQueue).filter(i => !i.mastered).length;
+  const [isCreatorOpen, setIsCreatorOpen] = React.useState(false);
 
   return (
     <div className="landing animate-fade">
@@ -90,13 +92,84 @@ function LandingPage({ onNav }: { onNav: (tab: Tab) => void }) {
           <div className="lac-desc">Questions you have missed — practice until fully mastered.</div>
         </button>
       </div>
+
+      {/* Creator Attribution Section below Study, Test, Revise */}
+      <div className="landing-creator-section">
+        <div className="landing-creator-card">
+          <div className="creator-attribution">
+            <span className="creator-attribution-text">
+              Made with <span className="creator-heart" aria-label="love">❤️</span>
+            </span>
+            <button
+              id="btn-creator-rakshan"
+              className="creator-name-btn"
+              onClick={() => setIsCreatorOpen(true)}
+              aria-haspopup="dialog"
+              aria-expanded={isCreatorOpen}
+              title="Click to view Rakshan's profiles & contact info"
+            >
+              <span className="creator-btn-glow" aria-hidden="true"></span>
+              <span className="creator-btn-name">Rakshan</span>
+              <span className="creator-btn-arrow">↗</span>
+            </button>
+          </div>
+
+          <div className="landing-social-row" aria-label="Creator links">
+            <a
+              href="https://github.com/silicon-rationalist"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-pill-link"
+              title="GitHub: silicon-rationalist"
+              aria-label="GitHub silicon-rationalist"
+            >
+              <GitHubIcon className="social-pill-icon" />
+              <span>GitHub</span>
+            </a>
+            <a
+              href="https://linkedin.com/in/rakshan-s"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-pill-link"
+              title="LinkedIn: rakshan-s"
+              aria-label="LinkedIn rakshan-s"
+            >
+              <LinkedInIcon className="social-pill-icon" />
+              <span>LinkedIn</span>
+            </a>
+            <a
+              href="https://instagram.com/sweet_poison.exe"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-pill-link"
+              title="Instagram: sweet_poison.exe"
+              aria-label="Instagram sweet_poison.exe"
+            >
+              <InstagramIcon className="social-pill-icon" />
+              <span>Instagram</span>
+            </a>
+            <a
+              href="mailto:rakshan.exe@gmail.com"
+              className="social-pill-link"
+              title="Email: rakshan.exe@gmail.com"
+              aria-label="Email rakshan.exe@gmail.com"
+            >
+              <MailIcon className="social-pill-icon" />
+              <span>Gmail</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Modal popup triggered by clicking Rakshan */}
+      <CreatorModal isOpen={isCreatorOpen} onClose={() => setIsCreatorOpen(false)} />
     </div>
   );
 }
 
 // ── Main App ────────────────────────────────────────────────────────────────
 export default function App() {
-  const [tab, setTab] = React.useState<Tab>('test');
+  const [tab, setTab] = React.useState<Tab>('home');
 
   function renderPage() {
     switch (tab) {
